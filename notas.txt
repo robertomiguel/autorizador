@@ -1,0 +1,140 @@
+fieldset
+
+{
+	border: 1px solid #6e0101;
+	Padding: 10px;
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	background-color:#F4F4F4;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	behavior:url(border-radius.htc);
+
+}
+
+legend {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #c70302;
+	border: 1px solid #6e0101;	
+	padding: 2px 6px;
+	background-color:#FFFFFF;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+USE [apla]
+GO
+
+/****** Object:  Table [dbo].[hb_autorizaciones]    Script Date: 05/14/2015 15:39:01 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[hb_autorizaciones]') AND type in (N'U'))
+DROP TABLE [dbo].[hb_autorizaciones]
+GO
+
+USE [apla]
+GO
+
+/****** Object:  Table [dbo].[hb_autorizaciones]    Script Date: 05/14/2015 15:39:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[hb_autorizaciones](
+	[nro_empresa] [numeric](4, 0) NOT NULL,
+	[nro_sucursal] [numeric](4, 0) NOT NULL,
+	[codigo_tarjeta] [numeric](2, 0) NOT NULL,
+	[codigo_autorizacion] [numeric](8, 0) NOT NULL,
+	[numero_tarjeta] [char](16) NULL,
+	[codigo_autorizacion_add] [char](2) NULL,
+	[numero_cuenta] [varchar](7) NULL,
+	[fecha_autorizacion] [datetime] NULL,
+	[importe] [numeric](12, 2) NULL,
+	[cant_cuotas] [numeric](2, 0) NULL,
+	[numero_cupon] [numeric](12, 0) NULL,
+	[codigo_comercio] [numeric](13, 0) NULL,
+	[importado] [numeric](1, 0) NULL,
+	[fecha_importado] [datetime] NULL,
+	[anulado] [numeric](1, 0) NULL,
+ CONSTRAINT [PK_hb_autorizaciones] PRIMARY KEY CLUSTERED 
+(
+	[nro_empresa] ASC,
+	[nro_sucursal] ASC,
+	[codigo_tarjeta] ASC,
+	[codigo_autorizacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [SJN]
+GO
+
+/****** Object:  Table [dbo].[hb_usuario]    Script Date: 04/23/2015 10:09:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[hb_usuario](
+	[nro_persona] [numeric](10, 0) NOT NULL,
+	[recordar_token] [varchar](100) NULL,
+	[email] [varchar](250) NOT NULL,
+	[clave] [varchar](60) NOT NULL,
+	[ultima_ip] [varchar](20) NULL,
+	[estado] [numeric](2, 0) NULL,
+	[nivel] [numeric](2, 0) NULL,
+	[ultimo_acceso] [datetime] NULL,
+	[fecha_bloqueo] [datetime] NULL,
+	[fecha_alta] [datetime] NULL,
+	[fecha_modificacion] [datetime] NULL,
+	[nro_persona_alta] [numeric](10, 0) NULL,
+	[nro_persona_bloqueo] [numeric](10, 0) NULL,
+	[nro_persona_modif] [numeric](10, 0) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[nro_persona] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[hb_usuario] ADD  DEFAULT ('0') FOR [estado]
+GO
+
+ALTER TABLE [dbo].[hb_usuario] ADD  DEFAULT ('0') FOR [nivel]
+GO
+
+
+select nro_persona from personas where soc_numero_socio = 97410
+insert into hb_usuario (
+nro_persona,
+email,
+clave,
+estado,
+nivel
+)
+values (
+4880,
+'socio@neoweb.com',
+'123123',
+1,
+1
+)
+select * from hb_usuario

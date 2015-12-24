@@ -1,0 +1,29 @@
+{
+    "name": "nathanmac/parser",
+    "description": "Simple PHP Parser Utility Library for API Development",
+    "keywords": ["parser", "json", "xml", "API"],
+    "homepage": "https://github.com/nathanmac/Parser",
+    "authors": [
+        {
+            "name": "Nathan Macnamara",
+            "email": "nathan.macnamara@outlook.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.2.0",
+        "illuminate/support": "~4.0",
+        "symfony/yaml": "2.4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "0.9.3",
+        "satooshi/php-coveralls": "0.6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nathanmac\\Utilities\\Parser\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

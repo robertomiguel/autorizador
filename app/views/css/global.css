@@ -1,0 +1,118 @@
+html {
+	height: 100%;
+    background-color: #e6e9e9;
+    background: none;
+}
+body {
+    margin: 0 auto;
+    padding: 0 0 4em;
+    max-width: 1024px;
+    min-height: 100%;
+    font-family: "sans-serif", sans-serif, Helvetica, Arial;
+    font-size: 14px;
+    line-height: 1.5em;
+    color: black;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+}
+.colorfondo {
+    background: #b2b0bf !important;
+}
+.fondoventana {
+    background: #e9e7f4;
+}
+.fondotitulo {
+    background: #b2b0bf;
+}
+button {
+	background: #b2b0bf;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 0;
+    padding-right: 13px;
+    padding-left: 13px;
+}
+button:hover {
+	background: #e0e0e2;
+}
+.fondopanel {
+    background: #e9e7f4;
+}
+.boton {
+	background: #b2b0bf;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 0;
+    padding-right: 13px;
+    padding-left: 13px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.boton:hover {
+	background: #e0e0e2;
+}
+
+.sombra {
+        -webkit-box-shadow: 0 0 8px 4px rgba(0, 0, 0, .5);
+        box-shadow: 0 0 8px 4px rgba(0, 0, 0, .5);
+    }
+.container.drop-shadow {
+    padding-left:0;
+    padding-right:0;
+}
+
+ .letra8 {font-size: 8px}
+ .letra9 {font-size: 9px}
+.letra10 {font-size: 10px}
+.letra11 {font-size: 11px}
+.letra12 {font-size: 12px}
+.letra13 {font-size: 13px}
+.letra14 {font-size: 14px}
+.letra15 {font-size: 15px}
+
+.centro {
+	position:absolute;
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;
+    margin:auto;
+}
+.texto-centro {
+  align-text:center;
+}
+.redondear {
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+}
+.texto-sombra {
+    color: white !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.texto-blanco{
+    color: white !important;
+}
+.gris {
+    background: gray;
+}
+
+.blanco {
+    background: white;
+}
+
+.derecha {float: right;}
+.izquierda {float: left;}
+.abajo {
+    display: table-cell;
+   vertical-align: bottom;
+}
+.titulo {
+	background: #b2b0bf;
+	height: 30px;
+	font-size: 100%;
+	color: white !important;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
