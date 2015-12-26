@@ -2,15 +2,28 @@
 class Formatos {
 static public function fechaHoraActual(){
     $dt = new DateTime('NOW');
-    $fecha = $dt->format('Y-m-d H:i:s');
-    return $fecha;
+    $formatoFecha = DB::select("SELECT ISDATE('2016/12/31') as valido");
+    if ( $formatoFecha[0]->valido == 0) {
+      return $dt->format('d/m/Y H:i:s'); //H:i:s
+    } else {
+      return $dt->format('Y/m/d H:i:s'); //H:i:s
+    }
 }
+
 static public function tarjeta($nro_tarjeta){
   return preg_replace('/(?!^.?)[0-9](?!(.){0,3}$)/', '*', $nro_tarjeta);
 }
 static public function fechaActual(){
-  $dt = new DateTime('NOW');
-  return $dt->format('Y-m-d');
+  /*$dt = new DateTime('NOW');
+  return $dt->format('Y-m-d'); */
+    $dt = new DateTime('NOW');
+    $formatoFecha = DB::select("SELECT ISDATE('2016/12/31') as valido");
+    if ( $formatoFecha[0]->valido == 0) {
+      return $dt->format('d/m/Y'); //H:i:s
+    } else {
+      return $dt->format('Y/m/d'); //H:i:s
+    }
+
 }
 static public function dni($dni){
 return number_format($dni,0,',','.');

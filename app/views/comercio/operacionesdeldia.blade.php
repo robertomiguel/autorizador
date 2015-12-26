@@ -7,6 +7,10 @@
     max-height: calc(100% - 120px);
     overflow-y: scroll;
 }
+.boton {
+  height: 50px;  
+  background: gray;
+}
 </style>
 
 <div>
@@ -35,5 +39,5 @@ Nro. Tarjeta: {{$op->numero_tarjeta}}
 </div>
 
 <script>
-  $('#mensajepie').html({{count($operaciones)}}+' operaciones / Total: $ '+{{$total}});
+  $('#mensajepie').html({{count($operaciones)}}+' operaciones / Total: $ '+{{$total}} + ' - <a class="boton btn-default" href="autorizaciones/imprimir-operaciones" target="_BLANK">Imprimir</a>');
 </script>

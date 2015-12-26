@@ -13,8 +13,8 @@ class Socio extends Eloquent {
 		$verifica_vto = 0;
 		//$nro_socio = 1807;
 
-		$ls_sql2 =    
-		"       tarjetas_cuentas.limite_credito - 
+		$ls_sql2 = "
+		       tarjetas_cuentas.limite_credito - 
 		      IsNull( 
 		      (Select sum(  Case  tarjetas_usuarios_mov.tipo_cbte_liquidacion
 		                  When  31 Then  tarjetas_usuarios_mov.saldo_actual_con

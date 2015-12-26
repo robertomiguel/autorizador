@@ -48,9 +48,7 @@ button:focus {border: solid 3px;  border-color: blue;}
 }
 
 .tabla td {text-align: center;
-	border-bottom: 15px solid transparent;
-	left: 5px;
-	padding-right: 10px;
+	padding-left: 5px; padding-right: 5px;
 }
 
 .titulo {
@@ -69,6 +67,12 @@ button:focus {border: solid 3px;  border-color: blue;}
 }
 .fondocolor {
 	background: #b2b0bf !important;
+}
+.form-control {
+	border-color: #8282FF !important; width: 100%;
+}
+.form-group {
+	padding: 0; margin: 0;
 }
 </style>
 
@@ -92,16 +96,21 @@ button:focus {border: solid 3px;  border-color: blue;}
 
 	<tbody>
 		<tr>
-			<td valign="top" ><br>NRO TARJETA:</td>
+			<td>NRO TARJETA:</td>
 			<td>
-				<div class="form-group has-error has-feedback">
+				<div class="form-group has-feedback">
    					<input type="text" class="form-control" id="nro_tarjeta" aria-describedby="nro_tarjetaStatus"
-   					 data-toggle="tooltip" data-placement="top" title="">
+   					 data-toggle="tooltip" data-placement="center" title="Nro Tarjeta">
   					<span id="tarjeta_icon" class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
-  					<span id="estado_tarjeta"></span>
 				</div>		
 			</td>
 			
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+  					<span id="estado_tarjeta"></span>
+			</td>
 		</tr>
 		<tr>
 			<td>SOCIO:</td>
@@ -111,7 +120,7 @@ button:focus {border: solid 3px;  border-color: blue;}
 			
 		</tr>
 		<tr>
-			<td valign="top" ><br>FORMA DE PAGO:</td>
+			<td>FORMA DE PAGO:</td>
 			<td>
 				<button id="contado" onclick="" class="form-control horizontal btn-default" style="width:120px">
 					<span class="glyphicon glyphicon-file"></span> Contado</button>
@@ -120,23 +129,27 @@ button:focus {border: solid 3px;  border-color: blue;}
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" ><br>CANT DE CUOTAS:</td>
+			<td>CANT DE CUOTAS:</td>
 			<td>
 				<div class="form-group has-error has-feedback">
    					<input type="text" class="form-control" id="cant_cuotas" aria-describedby="cant_cuotasStatus">
   					<span id="cuotas_icon" class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
-  					<span id="estado_cuotas"></span>
 				</div>		
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" ><br>IMPORTE TOTAL:</td>
+			<td></td>
+			<td>
+  				<span id="estado_cuotas"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>IMPORTE TOTAL:</td>
 			<td>
 				<table><tr><td>
 				<div class="form-group has-error has-feedback">
    					<input type="text" class="form-control" id="importe" aria-describedby="importeStatus">
   					<span id="importe_icon" class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
-					<span id="estado_importe"></span>
 				</div>
 				</td><td valign="top">
 				<button id="botoncaja" class="redondear btn-default" onclick="mostrarcaja()">
@@ -145,13 +158,24 @@ button:focus {border: solid 3px;  border-color: blue;}
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" ><br>NRO CUPON:</td>
+			<td></td>
+			<td>
+				<span id="estado_importe"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>NRO CUPON:</td>
 			<td>
 				<div class="form-group has-error has-feedback">
    					<input type="text" class="form-control" id="cupon" aria-describedby="cuponStatus">
   					<span id="cupon_icon" class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
-					<span id="estado_cupon"></span>
 				</div>		
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<span id="estado_cupon"></span>
 			</td>
 		</tr>
 	</tbody>

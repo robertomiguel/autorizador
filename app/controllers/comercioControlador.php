@@ -93,7 +93,7 @@ class ComercioControlador extends BaseController {
 			
 		}
 		if ($fecha_vencimiento < $fechahoy){
-			return $nombre.'|'.'Tarjeta Vencida';
+			return $nombre.'|'.'Tarjeta Vencida fck';
 		}
 		if ($fecha_inicio > $fechahoy){
 			return $nombre.'|'.'Fecha de Inicio posterior a hoy';
@@ -184,11 +184,13 @@ class ComercioControlador extends BaseController {
 		if ($socio_estado <> 'A'){
 			return 'El socio no está activo';
 		}
+
 		if ($cuenta_estado <> 0 && $cuenta_estado <> 4 ){
 			return 'Cuenta inactiva';
 		}
-		if ($fecha_vencimiento < $fechahoy){
-			return 'Tarjeta Vencida';
+		$dt = new DateTime($fecha_vencimiento);
+		if (date_format($dt,'d-m-Y') < $fechahoy){
+			return 'Tarjeta Vencida ' . $fechahoy;
 		}
 		if ($fecha_inicio > $fechahoy){
 			return 'Fecha de Inicio posterior a hoy';
@@ -294,29 +296,30 @@ class ComercioControlador extends BaseController {
 
 	public function postOperaciones(){
 		$nro_comercio = Persona::numeroComercio();
-		  $dt = new DateTime('NOW');
-  		//$fechahoy = $dt->format('Y-m-d').' 00:00:00.000';
-
     	$fechahoy = Formatos::fechaActual();
-		
 		$datos = HBAutorizaciones::operacionesDelDia($nro_comercio,$fechahoy);
 		if (count($datos)<=0) {
 			return 'No hay operaciones.';
 		}
-/*
-		$sql = "
-				select sum(hb_autorizaciones.importe) as total
-					from hb_autorizaciones
-					where hb_autorizaciones.codigo_comercio = $nro_comercio
-						and hb_autorizaciones.fecha_autorizacion >= '$fechahoy'
-						and isNull(hb_autorizaciones.anulado,0) = 0
-				";
-		$total = DB::select($sql)[0]->total;
-*/
 		return View::make('comercio.operacionesdeldia')
 							->with('operaciones',$datos);
-							//->with('total',$total);
 	}
+
+	public function getImprimirOperaciones(){
+		$nro_comercio = Persona::numeroComercio();
+    	$fechahoy = Formatos::fechaActual();
+		$operaciones = HBAutorizaciones::operacionesDelDia($nro_comercio,$fechahoy);
+		if (count($operaciones)<=0) {
+			return 'No hay operaciones.';
+		}
+		$pdf = App::make('dompdf');
+		$pdf->loadHTML(View::make('comercio.imprimiraut')->with('operaciones',$operaciones));
+		
+		return $pdf->stream();
+		//return $pdf->download('operaciones_'.Formatos::fechaActual());
+
+	}
+
 
 	public function postDetallecompra(){
 		

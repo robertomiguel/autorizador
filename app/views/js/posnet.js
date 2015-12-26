@@ -233,9 +233,11 @@ function validarTarjeta() {
       function(data){
 
           var r = data.split('|');
+
           $('#estado_tarjeta').html('');
 
-          if (r[1]=='Correcto') {
+          if ( r[1] == 'Correcto' ) {
+
             $("#tarjeta_icon").removeClass('glyphicon-pencil');
             $("#tarjeta_icon").removeClass('glyphicon-remove');
             $("#tarjeta_icon").addClass('glyphicon-ok');
@@ -257,7 +259,7 @@ function validarTarjeta() {
               $('#nombre').text(r[0]);
               $('#estado_tarjeta').text('');
             }
-      }); 
+      });
 }
 
 function validarCuotas () {
