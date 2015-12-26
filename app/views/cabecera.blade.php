@@ -36,6 +36,7 @@ $tema = $ini[$sel];
                                 '/js/bootstrap.min.js',
                                 '/js/jquery-ui.min.js',
                                 '/js/jquery.dataTables.min.js',
+                                '/js/posnet.js',
                                 )) }}
 
 

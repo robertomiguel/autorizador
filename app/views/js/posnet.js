@@ -1,17 +1,26 @@
 $(document).ready(function() {
-    $('#mostrarcaja').hide();
+  $( "#desarrollo" ).dialog({
+      position: { my: "center", at: "right", of: window },
+      resizable: false,
+      height: 400,
+      which: 500,
+      autoOpen: false,
+      show: {
+        effect: "clip",
+        duration: 500
+      },
+      hide: {
+        effect: "clip",
+        duration: 500
+      }
+    });
+
     $('#nro_tarjeta').focus();
 	  /*$('#cant_cuotas').prop( "disabled", true );
     $('#importe').prop( "disabled", true );
     $('#cupon').prop( "disabled", true );*/
     $('#contado').click(function(){contado();});
     $('#cuotas').click(function(){cuotas();});
-});
-
-function cerrar(){
-  window.location.href = "/salir";
-}
-
 
 $("#nro_tarjeta").keyup(function(event) {
   //alert(event.which); return;
@@ -47,22 +56,6 @@ $("#contado").keyup(function(event) {
   }
 });
 
-var pago;
-
-function contado(){
-    pago = 1;
-    $("#cuotas_icon").removeClass('glyphicon-pencil');
-    $("#cuotas_icon").removeClass('glyphicon-remove');
-    $("#cuotas_icon").addClass('glyphicon-ok');
-    $('#contado').attr('class', 'form-control horizontal btn-primary');
-    $('#cuotas').attr('class', 'derecha form-control btn-default');
-	  //$('#estado_seleccion').text('CONTADO');
-	  $('#cant_cuotas').val('1');
-    $('#cant_cuotas').prop( "disabled", true );
-    $('#importe').prop( "disabled", false );
-	  $('#importe').focus();
-}
-
 $("#cuotas").keyup(function(event) {
   switch (event.which) {
   	case 13: //enter
@@ -79,20 +72,6 @@ $("#cuotas").keyup(function(event) {
     break;
   }
 });
-
-function cuotas(){
-      pago = 2;
-    $('#contado').attr('class', 'form-control horizontal btn-default');
-    $('#cuotas').attr('class', 'derecha form-control btn-primary');
-    var cuotas = $('#cant_cuotas').val() * 1;
-    if (cuotas<=1) {
-        $('#cant_cuotas').val('2');
-    };
-    $('#cant_cuotas').select();    
-//	$('#estado_seleccion').text('CUOTAS');
-	$('#cant_cuotas').prop( "disabled", false );
-  $('#cant_cuotas').focus();
-}
 
 $("#cant_cuotas").keyup(function(event) {
   switch (event.which) {
@@ -113,13 +92,13 @@ $("#cant_cuotas").keyup(function(event) {
 
 $("#cant_cuotas").keydown(function(event) {
   switch (event.which) {
-  	case 13: //enter
+    case 13: //enter
 
-	        $('#importe').focus();
+          $('#importe').focus();
           validarCuotas();
-  	break;
+    break;
     case 40: //abajo
-    	    $('#importe').focus();
+          $('#importe').focus();
           validarCuotas();
     break;
   }
@@ -128,7 +107,7 @@ $("#cant_cuotas").keydown(function(event) {
 $("#importe").keyup(function(event) {
   switch (event.which) {
     case 13: //enter
-  	        $('#cupon').prop( "disabled", false );
+            $('#cupon').prop( "disabled", false );
     break;
     case 38: //arriba
           if (pago==1) {
@@ -146,10 +125,10 @@ $("#importe").keyup(function(event) {
 $("#importe").keydown(function(event) {
   switch (event.which) {
     case 13: //enter
-	        $('#cupon').focus();
+          $('#cupon').focus();
           validarImporte();
 
-  	break;
+    break;
     case 40: //abajo
           $('#cupon').focus();
           validarImporte();
@@ -175,7 +154,7 @@ $("#cupon").keyup(function(event) {
 //    case 13: //enter
   //  break;
     case 38: //arriba
-    		$('#importe').focus();
+        $('#importe').focus();
         validarCupon();
     break;
   }
@@ -183,22 +162,11 @@ $("#cupon").keyup(function(event) {
 
 $(".f_amarillo").keyup(function(event) {
   switch (event.which) {
-  	case 13: //enter
-	        //autorizar();
-  	break;
+    case 13: //enter
+          //autorizar();
+    break;
     case 39: //derecha
         $('.f_rojo').focus();
-    break;
-    case 38: //arriba
-    		$('#cupon').focus();
-    break;
-  }
-});
-
-$(".f_rojo").keydown(function(event) {
-  switch (event.which) {
-    case 37: // izquierda
-        $('.f_amarillo').focus();
     break;
     case 38: //arriba
         $('#cupon').focus();
@@ -206,7 +174,54 @@ $(".f_rojo").keydown(function(event) {
   }
 });
 
-//-----------------------------------------------------------
+  $(".f_rojo").keydown(function(event) {
+    switch (event.which) {
+      case 37: // izquierda
+          $('.f_amarillo').focus();
+      break;
+      case 38: //arriba
+          $('#cupon').focus();
+      break;
+  }
+});
+
+}); // Luego de Cargar pagina-------------------------------------------------------------------------
+
+
+function cerrar(){
+  window.location.href = "/salir";
+}
+
+var pago;
+
+function contado(){
+    pago = 1;
+    $("#cuotas_icon").removeClass('glyphicon-pencil');
+    $("#cuotas_icon").removeClass('glyphicon-remove');
+    $("#cuotas_icon").addClass('glyphicon-ok');
+    $('#contado').attr('class', 'form-control horizontal btn-primary');
+    $('#cuotas').attr('class', 'derecha form-control btn-default');
+    //$('#estado_seleccion').text('CONTADO');
+    $('#cant_cuotas').val('1');
+    $('#cant_cuotas').prop( "disabled", true );
+    $('#importe').prop( "disabled", false );
+    $('#importe').focus();
+}
+
+function cuotas(){
+      pago = 2;
+    $('#contado').attr('class', 'form-control horizontal btn-default');
+    $('#cuotas').attr('class', 'derecha form-control btn-primary');
+    var cuotas = $('#cant_cuotas').val() * 1;
+    if (cuotas<=1) {
+        $('#cant_cuotas').val('2');
+    };
+    $('#cant_cuotas').select();    
+//  $('#estado_seleccion').text('CUOTAS');
+  $('#cant_cuotas').prop( "disabled", false );
+  $('#cant_cuotas').focus();
+}
+
 function validarTarjeta() {
   if ($('#nro_tarjeta').val()=='') {return;}
       $('#estado_tarjeta').text('Validando...');
@@ -242,8 +257,6 @@ function validarTarjeta() {
               $('#nombre').text(r[0]);
               $('#estado_tarjeta').text('');
             }
-
-
       }); 
 }
 
@@ -400,9 +413,18 @@ function mensajecerrar(){
 }
 
 function mostrarcaja(){
-  $('#mostrarcaja').toggle();
+ 
+  var visible = $("#desarrollo" ).dialog( "isOpen" );
+  if ( visible ) {
+    $( "#desarrollo" ).dialog( "close" );
+  } else {
+     $('.ui-dialog').addClass('sombra');
+     $( "#desarrollo" ).dialog( "open" );
+  }
+ 
 }
 
+/*
 function detallecompra(cuotas, monto) {
 
   $('#contenidocaja').html('Calculando...');
@@ -415,3 +437,5 @@ function detallecompra(cuotas, monto) {
     $('#contenidocaja').html(data);
   });
 }
+*/
+

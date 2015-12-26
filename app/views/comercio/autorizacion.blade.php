@@ -1,15 +1,6 @@
-<html>
-	<head>
-	<title>@yield('title', 'HOME BANKING')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/neoicon.png" />
-{{ Cargar::stylesheet(array(
-                          	'/css/bootstrap.css',
-                          	'/css/bootstrap-theme.css',
-                          	'/css/global.css',
-                          	'/css/dataTables.jqueryui.css',
-                          )) }}    
-            
+@extends ('cabecera')
+
+@section ('content')            
 <style>
 
 body {
@@ -187,13 +178,14 @@ button:focus {border: solid 3px;  border-color: blue;}
 </div>
 
 	@include('general.mensajecaja')
-	@include('general.mostrarcaja')
+	{{--@include('general.mostrarcaja')--}}
 	{{-- @include('comercio.operacionesdeldia') --}}
+	<div id="desarrollo" title="Detalle de Compra" class="letra12">
+  		<div id="contenidocaja"></div>
+	</div>
+ 
+@stop
 
-</html>
-{{ Cargar::javascript(array(
-                            '/js/jquery-1.11.2.min.js',
-                            '/js/bootstrap.min.js',
-                            '/js/posnet.js',
-                            '/js/jquery-ui.min.js'
-                            )) }}
+
+
+                            
