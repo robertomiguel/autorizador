@@ -9,9 +9,14 @@ static public function fechaHoraActual(){
       return $dt->format('Y/m/d H:i:s'); //H:i:s
     }
 }
-
 static public function tarjeta($nro_tarjeta){
   return preg_replace('/(?!^.?)[0-9](?!(.){0,3}$)/', '*', $nro_tarjeta);
+}
+static public function tarjetaguion($nro){
+  $nro = substr_replace($nro,'-',4,0);
+  $nro = substr_replace($nro,'-',9,0);
+  $nro = substr_replace($nro,'-',14,0);
+  return $nro;
 }
 static public function fechaActual(){
   /*$dt = new DateTime('NOW');

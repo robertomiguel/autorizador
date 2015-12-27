@@ -153,7 +153,7 @@ button:focus {border: solid 3px;  border-color: blue;}
 				</div>
 				</td><td valign="top">
 				<button id="botoncaja" class="redondear btn-default" onclick="mostrarcaja()">
-				<span class="glyphicon glyphicon-eye-open"></span> Cuotas </button>
+				<span class="glyphicon glyphicon-eye-open"></span> Detalle </button>
 				</td></tr></table>
 			</td>
 		</tr>
@@ -207,7 +207,13 @@ button:focus {border: solid 3px;  border-color: blue;}
 	<div id="desarrollo" title="Detalle de Compra" class="letra12">
   		<div id="contenidocaja"></div>
 	</div>
- 
+
+{{-- <div>
+    <object data="autorizaciones/imprimir-operaciones" type="application/pdf" width="300" height="200">
+        alt : <a href="test.pdf">test.pdf</a>
+    </object>
+</div>--}}
+
 @stop
 
 

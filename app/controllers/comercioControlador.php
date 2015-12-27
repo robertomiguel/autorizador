@@ -312,10 +312,14 @@ class ComercioControlador extends BaseController {
 		if (count($operaciones)<=0) {
 			return 'No hay operaciones.';
 		}
+		
 		$pdf = App::make('dompdf');
 		$pdf->loadHTML(View::make('comercio.imprimiraut')->with('operaciones',$operaciones));
 		
-		return $pdf->stream();
+		//$pdf = $dompdf->get_canvas()->get_cpdf();
+		return $pdf->stream('operaciones_'.Formatos::fechaActual());
+		
+		//return View::make('comercio.imprimiraut')->with('operaciones',$operaciones);
 		//return $pdf->download('operaciones_'.Formatos::fechaActual());
 
 	}

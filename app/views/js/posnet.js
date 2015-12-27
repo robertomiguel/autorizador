@@ -386,7 +386,9 @@ function autorizar() {
 } //--------- fin autorizar
 
 function operaciones() {
-
+  //window.location.assign('{{url("/autorizaciones/imprimir-operaciones")}}');
+  window.open('/autorizaciones/imprimir-operaciones', '_blank');
+/*
   $('#mensajetitulo').html("Operaciones del día");
   $('#mensajetexto').html('Consultando...');
   $('#mensajecaja').modal('show');
@@ -395,7 +397,7 @@ function operaciones() {
     function(data){
     $('#mensajetexto').html(data);
   });
-
+*/
 }
 
 function reiniciar(){
@@ -415,7 +417,6 @@ function mensajecerrar(){
 }
 
 function mostrarcaja(){
- 
   var visible = $("#desarrollo" ).dialog( "isOpen" );
   if ( visible ) {
     $( "#desarrollo" ).dialog( "close" );
@@ -423,7 +424,6 @@ function mostrarcaja(){
      $('.ui-dialog').addClass('sombra');
      $( "#desarrollo" ).dialog( "open" );
   }
- 
 }
 
 /*
