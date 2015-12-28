@@ -113,6 +113,10 @@ class ComercioControlador extends BaseController {
 	public function postValidarImporte(){
 		$nro_tarjeta  = str_replace('-', '', Input::get('nro_tarjeta'));
 		$importe  = str_replace(',', '.', Input::get('importe')) * 1;
+
+		if ($importe < 10 ) {return 'Monto Mímino $10.-';}
+		if ($importe > 1000000 ) {return 'Monto Máximo $1.000.000.-';}
+
 		$pago  = Input::get('pago') * 1;
 		if ($pago==0 || $pago>2) { return 'Forma de pago incorrecta';}
 		if ($pago==1) { $pago = 'contado';}

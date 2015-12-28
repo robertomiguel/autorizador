@@ -8,7 +8,7 @@ class Licencia extends Eloquent {
 
 	public static function getLicencia ($empresa) {
 		$sql = "
-				SELECT clave, fecha_clave
+				SELECT clave
 				  FROM clientes
 				 WHERE nombre_empresa = '$empresa'
 				   AND habilitado = 1

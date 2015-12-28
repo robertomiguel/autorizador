@@ -426,7 +426,7 @@ function mostrarcaja(){
   }
 }
 
-/*
+
 function detallecompra(cuotas, monto) {
 
   $('#contenidocaja').html('Calculando...');
@@ -439,5 +439,3 @@ function detallecompra(cuotas, monto) {
     $('#contenidocaja').html(data);
   });
 }
-*/
-
