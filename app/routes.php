@@ -6,24 +6,7 @@ App::missing(function($exception)
 
 //--- PRUEBA ANDROID
 Route::get('neotest', function() {   
-    //$xml = simplexml_load_file('c:/neoweb/xml/personas.xml');
-    //return View::make('verxml')->with('xml',$xml);
-    //echo $xml->personas_row[0]->apellido . $xml->personas_row[0]->nombre ;
-    $plan = '11 ';
-    $monto = '250000.12 ';
-    $archivo = 'soc0001001';
-
-    $salida = shell_exec('d:\autorizador_exe\gen_aye.exe '.$plan.$monto.$archivo);
-    $xml = simplexml_load_file('c:/neoweb/temp/'.$archivo.'.xml');
-    echo "Plan:$plan - Monto:$monto - Archivo:$archivo <br>";
-    foreach ($xml as $dato) {
-      echo '   Plan:'.$dato->plan . '<br>';
-      echo '  Monto:'.Formatos::moneda($dato->monto) . '<br>';
-      echo 'Archivo:'.$dato->archivo . '<br>';
-    }
-
     return;
-    
 });
 
 Route::post('licencia', function() {
@@ -144,11 +127,10 @@ Route::controller('listado', 'prueba');
 Route::post('entrar', 'loginControlador@acceso');
 Route::get('salir', 'loginControlador@salir');
 
-
 //--- cargar usuario de prueba
 Route::get('verlog/{archivo}', function($archivo)
 { /*
-  $clave = '123';
+  $clave = '123123';
   $email = 'super@apla.com';
   $nro_persona = 1064;
   $estado = 0; //0=cambiar pass, 1=acceso
@@ -162,6 +144,4 @@ Route::get('verlog/{archivo}', function($archivo)
 	return 'Insertado: '.$insert; */
 
 return View::make('general.verlog')->with('archivo',$archivo);
- 
 });
-

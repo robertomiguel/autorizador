@@ -336,8 +336,14 @@ class ComercioControlador extends BaseController {
 		$archivo = str_pad(Persona::numeroComercio().'', 10, '0', STR_PAD_LEFT );
 		//return $cuotas.$monto.$archivo;
 		
+		if (!file_exists('d:/autorizador_exe/'.$archivo.'.xml')) {
+			Log::error('NO EXISTE: '.'d:/autorizador_exe/'.$archivo.'.xml');
+			return 'no se puede leer detalle';
+		}
+
 		$salida = shell_exec('d:\autorizador_exe\gen_aye.exe '.$cuotas.$monto.$archivo);
-    	$xml = simplexml_load_file('c:/neoweb/temp/'.$archivo.'.xml');
+    	$xml 	= simplexml_load_file('d:/autorizador_exe/'.$archivo.'.xml');
+
 		return View::make('comercio.detallecompra')->with('detalle',$xml);
 	}
 }
