@@ -279,6 +279,10 @@ function validarCuotas () {
             $("#cuotas_icon").addClass('glyphicon-ok');
             $('#estado_cuotas').html('');
 
+            if ( $('#importe').val() * 1 > 0 ) {
+              detallecompra($('#cant_cuotas').val(),$('#importe').val());
+            }
+
         } else {
             $("#cuotas_icon").removeClass('glyphicon-pencil');
             $("#cuotas_icon").removeClass('glyphicon-ok');
@@ -432,6 +436,7 @@ function detallecompra(cuotas, monto) {
   $('#contenidocaja').html('Calculando...');
 
   $.post("autorizaciones/detallecompra",{
+    tarjeta: $('#nro_tarjeta').val(),
     cuotas: cuotas,
     monto: monto
   },

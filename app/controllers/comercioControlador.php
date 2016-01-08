@@ -330,20 +330,26 @@ class ComercioControlador extends BaseController {
 
 
 	public function postDetallecompra(){
-		
-		$cuotas  = str_pad( Input::get('cuotas').'', 3, '0', STR_PAD_LEFT );
-		$monto 	 = str_pad( Input::get('monto').'', 10, '0', STR_PAD_LEFT );
-		$archivo = str_pad(Persona::numeroComercio().'', 10, '0', STR_PAD_LEFT );
+
+		$tarjeta  = str_pad( Input::get('tarjeta').''		, 16, '0', STR_PAD_LEFT );
+		$comercio = str_pad( Persona::numeroComercio().''	, 13, '0', STR_PAD_LEFT );
+		$cuotas   = str_pad( Input::get('cuotas' ).''		,  2, '0', STR_PAD_LEFT );
+		$monto 	  = str_pad( Input::get('monto'  ).''		, 12, '0', STR_PAD_LEFT );
 		//return $cuotas.$monto.$archivo;
-		
-		if (!file_exists('d:/autorizador_exe/'.$archivo.'.xml')) {
-			Log::error('NO EXISTE: '.'d:/autorizador_exe/'.$archivo.'.xml');
+		$parametro = $tarjeta.$comercio.$cuotas.$monto;
+		$salida = shell_exec("d:\ivrweb\ivrweb.exe $parametro");
+		Log::info("\nComando: d:\ivrweb\ivrweb.exe $parametro");
+
+		if (!file_exists('d:/ivrweb/detalles/'.$tarjeta.'.xml')) {
+			Log::error('NO EXISTE: '.'d:/ivrweb/detalles/'.$tarjeta.'.xml');
 			return 'no se puede leer detalle';
 		}
 
-		$salida = shell_exec('d:\autorizador_exe\gen_aye.exe '.$cuotas.$monto.$archivo);
-    	$xml 	= simplexml_load_file('d:/autorizador_exe/'.$archivo.'.xml');
+    	$xml = simplexml_load_file('d:/ivrweb/detalles/'.$tarjeta.'.xml');
 
-		return View::make('comercio.detallecompra')->with('detalle',$xml);
+    	$nroPlan = TarjetasPlanes::nroPlan($cuotas * 1);
+    	$promo = TarjetaPlanPromocion::buscarPromo($nroPlan);
+
+		return View::make('comercio.detallecompra')->with('detalle',$xml)->with('promo',$promo);
 	}
 }
