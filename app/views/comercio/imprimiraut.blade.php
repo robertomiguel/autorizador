@@ -44,7 +44,7 @@
     <td>
       <span class="letra14">{{Empresa::find(1)->nombre_int}}</span> <br>
       <span class="letra13">Autorizaciones de Tarjeta del Día</span> <br>
-      <span class="letra12">{{Formatos::fechaActual()}}</span>
+      <span class="letra12">{{Formatos::fecha(Formatos::fechaActual())}}</span>
     </td>
   </tr>
 </table>

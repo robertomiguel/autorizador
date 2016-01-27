@@ -331,14 +331,25 @@ class ComercioControlador extends BaseController {
 
 	public function postDetallecompra(){
 
+		if ( Input::get('cuotas') * 1 < 2 ) {
+			return 'Mínimo de cuotas 2';
+		}
+
 		$tarjeta  = str_pad( Input::get('tarjeta').''		, 16, '0', STR_PAD_LEFT );
 		$comercio = str_pad( Persona::numeroComercio().''	, 13, '0', STR_PAD_LEFT );
 		$cuotas   = str_pad( Input::get('cuotas' ).''		,  2, '0', STR_PAD_LEFT );
 		$monto 	  = str_pad( Input::get('monto'  ).''		, 12, '0', STR_PAD_LEFT );
 		//return $cuotas.$monto.$archivo;
 		$parametro = $tarjeta.$comercio.$cuotas.$monto;
-		$salida = shell_exec("d:\ivrweb\ivrweb.exe $parametro");
-		Log::info("\nComando: d:\ivrweb\ivrweb.exe $parametro");
+
+		//$salida = shell_exec("d:\ivrweb\ivrweb.exe $parametro");
+		//$comando = 'cmd /c d:\ivrweb\ivrweb.exe ' . $parametro;
+		//$comando = 'd:\ivrweb\exec.bat ' . $parametro;
+		//$salida = exec($comando);
+		$comando = 'd:\ivrweb\ivrweb.exe ' . $parametro;
+		$usr = exec('whoami');
+		Log::info('\nComando: ' . $comando . ' - USR: ' . $usr);
+		$r = shell_exec($comando);
 
 		if (!file_exists('d:/ivrweb/detalles/'.$tarjeta.'.xml')) {
 			Log::error('NO EXISTE: '.'d:/ivrweb/detalles/'.$tarjeta.'.xml');
@@ -346,6 +357,8 @@ class ComercioControlador extends BaseController {
 		}
 
     	$xml = simplexml_load_file('d:/ivrweb/detalles/'.$tarjeta.'.xml');
+
+    	unlink('d:/ivrweb/detalles/'.$tarjeta.'.xml');
 
     	$nroPlan = TarjetasPlanes::nroPlan($cuotas * 1);
     	$promo = TarjetaPlanPromocion::buscarPromo($nroPlan);

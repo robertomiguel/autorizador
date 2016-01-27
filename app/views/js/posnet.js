@@ -263,7 +263,15 @@ function validarTarjeta() {
 }
 
 function validarCuotas () {
-  if ($('#cant_cuotas').val()=='') {return;}
+  if (pago==2 && $('#cant_cuotas').val()*1 <= 1 ) {
+    $("#cuotas_icon").removeClass('glyphicon-pencil');
+    $("#cuotas_icon").removeClass('glyphicon-ok');
+    $("#cuotas_icon").addClass('glyphicon-remove');
+    $('#estado_cuotas').html('Pago en cuotas: Mínimo 2');
+    $('#cant_cuotas').focus();
+    return;
+  }
+  if ($('#cant_cuotas').val()=='' || $('#cant_cuotas').val()=='1') {return;}
   $('#estado_cuotas').text('Validando...');
 
   $.post("autorizaciones/validar-cuotas",
@@ -311,9 +319,11 @@ function validarImporte() {
             $("#importe_icon").removeClass('glyphicon-remove');
             $("#importe_icon").addClass('glyphicon-ok');
             $('#estado_importe').html('');
-
-            detallecompra($('#cant_cuotas').val(),$('#importe').val());
-
+            if (pago==2) {
+              detallecompra($('#cant_cuotas').val(),$('#importe').val());
+            } else {
+              detallecontado();
+            }
         } else {
             $("#importe_icon").removeClass('glyphicon-pencil');
             $("#importe_icon").removeClass('glyphicon-ok');
@@ -430,7 +440,6 @@ function mostrarcaja(){
   }
 }
 
-
 function detallecompra(cuotas, monto) {
 
   $('#contenidocaja').html('Calculando...');
@@ -443,4 +452,10 @@ function detallecompra(cuotas, monto) {
   function(data){
     $('#contenidocaja').html(data);
   });
+
+}
+
+function detallecontado(){
+  var importe = $('#importe').val() * 1;
+  $('#contenidocaja').html("<pre>PAGO CONTADO<br><br>UN PAGO DE: $" + importe.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + "</pre>");
 }
