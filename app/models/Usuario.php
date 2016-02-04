@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
@@ -18,13 +17,21 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
   static public function actualizaFechaIp(){
 
       $nro_persona = Auth::user()->nro_persona;
-      $ip = Request::getClientIp();
+      //$ip = Request::getClientIp();
+      if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+          $ip = $_SERVER['HTTP_CLIENT_IP'];
+          } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+          $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+          } else {
+          $ip = $_SERVER['REMOTE_ADDR'];
+      }
+      log::info("Conexion desde: '$ip'");
       $dt = new DateTime('NOW');
       $fecha = $dt->format('Y-m-d H:i:s');
       $resultado = DB::update("
-                  UPDATE hb_usuario
-                     SET ultima_ip = '$ip', ultimo_acceso =  convert(datetime ,'$fecha',120)
-                    WHERE nro_persona = $nro_persona
+                 UPDATE hb_usuario
+                    SET ultima_ip = '$ip', ultimo_acceso =  convert(datetime ,'$fecha',120)
+                  WHERE nro_persona = $nro_persona
                   ");
   }
 

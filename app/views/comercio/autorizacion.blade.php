@@ -14,7 +14,7 @@ body {
 	width: 500px;
  	
  	margin: auto;
- 	top: 50px;
+ 	top: 25px;
 }
 input:focus { 
     background-color: #FFFFCC;
@@ -74,6 +74,12 @@ button:focus {border: solid 3px;  border-color: blue;}
 .form-group {
 	padding: 0; margin: 0;
 }
+.tituloComercio{
+	text-align: center;
+	font-size: 20px;
+	color: blue;
+	padding-top: 25px;
+}
 </style>
 
 </head>
@@ -81,7 +87,10 @@ button:focus {border: solid 3px;  border-color: blue;}
 <body>
 
 <div class="ui-state-highlight cabeza titulo fondocolor" align="center"> {{Empresa::find(1)->nombre_legal}}</div>
-
+<div><a href="/cambiarclave" class="derecha letra11">Cambiar Contraseña</a></div>
+<div class="tituloComercio textoSombra">
+	{{Persona::nombreComercio()}}
+</div>
 <a href="http://www.neosistemassrl.com/" target="_blank" class="logo">
 	<img src="img/neologo.png" alt="Grupo Neosistemas">
 </a>

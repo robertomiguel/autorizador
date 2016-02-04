@@ -339,16 +339,13 @@ class ComercioControlador extends BaseController {
 		$comercio = str_pad( Persona::numeroComercio().''	, 13, '0', STR_PAD_LEFT );
 		$cuotas   = str_pad( Input::get('cuotas' ).''		,  2, '0', STR_PAD_LEFT );
 		$monto 	  = str_pad( Input::get('monto'  ).''		, 12, '0', STR_PAD_LEFT );
-		//return $cuotas.$monto.$archivo;
+
 		$parametro = $tarjeta.$comercio.$cuotas.$monto;
 
-		//$salida = shell_exec("d:\ivrweb\ivrweb.exe $parametro");
-		//$comando = 'cmd /c d:\ivrweb\ivrweb.exe ' . $parametro;
-		//$comando = 'd:\ivrweb\exec.bat ' . $parametro;
-		//$salida = exec($comando);
 		$comando = 'd:\ivrweb\ivrweb.exe ' . $parametro;
-		$usr = exec('whoami');
-		Log::info('\nComando: ' . $comando . ' - USR: ' . $usr);
+		//$usr = exec('whoami'); . ' - USR: ' . $usr
+		Log::info('CMD: ' . $comando);
+		//$r = shell_exec($comando);
 		$r = shell_exec($comando);
 
 		if (!file_exists('d:/ivrweb/detalles/'.$tarjeta.'.xml')) {

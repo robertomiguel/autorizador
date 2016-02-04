@@ -67,7 +67,7 @@
 					 	<span class="glyphicon glyphicon-remove"></span> Cancelar
 					</a>
 					@else
-					<a href="/usuario" class="btn btn-primary btn-sm colorfondo texto-sombra derecha">
+					<a href="/autorizaciones" class="btn btn-primary btn-sm colorfondo texto-sombra derecha">
 					 	<span class="glyphicon glyphicon-remove"></span> Cancelar
 					</a>
 					@endif

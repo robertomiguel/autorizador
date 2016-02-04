@@ -1,5 +1,9 @@
 <?php
 class Formatos {
+static public function mostrarFecha(){
+  $dt = new DateTime('NOW');
+  return $dt->format('d/m/Y H:i');
+}
 static public function fechaHoraActual(){
     $dt = new DateTime('NOW');
     $formatoFecha = DB::select("SELECT ISDATE('2016/12/31') as valido");

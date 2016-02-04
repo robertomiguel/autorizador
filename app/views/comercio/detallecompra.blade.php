@@ -1,20 +1,23 @@
 <pre>
 @if ( $promo <> 'no hay')
 Promoción:<br>
-{{$promo[0]->nombre}} <br>
+{{$promo[0]->nombre}}<br>
 Vencimiento: {{Formatos::fecha($promo[0]->vencimiento)}}
 @else
-	No hay promoción
+	 No hay promoción
 @endif
+</pre>
+<pre>
+         {{Formatos::mostrarFecha()}}
 </pre>
 
 <pre>
 @foreach ($detalle as $info)
- Solicitado: {{$info->solicitado}} 	<br>
-       Tasa: {{$info->tasa}} 		<br>
-    Interes: {{$info->interes}} 	<br>
-      Total: {{$info->total}} 		<br>
-Cant Cuotas: {{$info->cantcuotas}} 	<br>
-Valor Cuota: {{$info->cuota}}
+ Solicitado: ${{Formatos::moneda($info->solicitado)}}<br>
+       Tasa: {{$info->tasa}}%<br>
+    Interes: ${{Formatos::moneda($info->interes)}}<br>
+      Total: ${{Formatos::moneda($info->total)}}<br>
+Cant Cuotas: {{$info->cantcuotas}}<br>
+Valor Cuota: ${{Formatos::moneda($info->cuota)}}
 @endforeach
 </pre>
