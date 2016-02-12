@@ -9,7 +9,7 @@
 }
 .boton {
   height: 50px;  
-  background: gray;
+  color: blue;
 }
 </style>
 
@@ -39,5 +39,5 @@ Nro. Tarjeta: {{$op->numero_tarjeta}}
 </div>
 
 <script>
-  $('#mensajepie').html({{count($operaciones)}}+' operaciones / Total: $ '+{{$total}} + ' - <a class="boton btn-default" href="autorizaciones/imprimir-operaciones" target="_BLANK">Imprimir</a>');
+  $('#mensajepie').html({{count($operaciones)}}+' operaciones / Total: $ '+{{$total}} + ' - <a class="boton" href="autorizaciones/imprimir-operaciones" target="_BLANK">Imprimir</a>');
 </script>

@@ -103,9 +103,16 @@ class ComercioControlador extends BaseController {
 
 	public function postValidarCuotas(){
 		$cuotas  = Input::get('cuotas') * 1;
+		$numero_tarjeta = Input::get('numero_tarjeta');
 		$planes = TarjetasPlanes::validarCuotas($cuotas) * 1;
 		if ($planes==0){
 			return 'Supera el límite de cuotas';
+		}
+
+		$numero_cuenta = TarjetasPlasticos::cuenta($numero_tarjeta);
+
+		if (!TarjetasLiquidaciones::validarLiquidaciones($numero_cuenta, $cuotas)) {
+			return 'Faltan cargar Períodos para éstas cuotas';
 		}
 		return 'Correcto';
 	}
@@ -210,10 +217,16 @@ class ComercioControlador extends BaseController {
 		if ($pago=='contado' && $cuotas <> 1 )
 			{ return 'Para pago de Contado, la cantidad de cuotas debe ser 1'; }
 		$planes = TarjetasPlanes::validarCuotas($cuotas) * 1;
-		if ($planes==0){
+		if ($planes <= 0) {
 			return 'Supera el límite de cuotas';
 		}
-		
+
+	//--- Validar períodos de cuotas
+		$numero_cuenta = TarjetasPlasticos::cuenta($nro_tarjeta);
+		if (!TarjetasLiquidaciones::validarLiquidaciones($numero_cuenta, $cuotas)) {
+			return 'Faltan cargar Períodos para éstas cuotas';
+		}
+
 	//--- Validar importe
 		if ($importe * 1 <= 0 ) {return 'Importe Inválido';}
 		
@@ -342,20 +355,20 @@ class ComercioControlador extends BaseController {
 
 		$parametro = $tarjeta.$comercio.$cuotas.$monto;
 
-		$comando = 'd:\ivrweb\ivrweb.exe ' . $parametro;
+		$comando = 'c:\neoweb\ivrweb\ivrweb.exe ' . $parametro;
 		//$usr = exec('whoami'); . ' - USR: ' . $usr
 		Log::info('CMD: ' . $comando);
 		//$r = shell_exec($comando);
 		$r = shell_exec($comando);
 
-		if (!file_exists('d:/ivrweb/detalles/'.$tarjeta.'.xml')) {
+		if (!file_exists('c:/neoweb/ivrweb/detalles/'.$tarjeta.'.xml')) {
 			Log::error('NO EXISTE: '.'d:/ivrweb/detalles/'.$tarjeta.'.xml');
 			return 'no se puede leer detalle';
 		}
 
-    	$xml = simplexml_load_file('d:/ivrweb/detalles/'.$tarjeta.'.xml');
+    	$xml = simplexml_load_file('c:/neoweb/ivrweb/detalles/'.$tarjeta.'.xml');
 
-    	unlink('d:/ivrweb/detalles/'.$tarjeta.'.xml');
+    	unlink('c:/neoweb/ivrweb/detalles/'.$tarjeta.'.xml');
 
     	$nroPlan = TarjetasPlanes::nroPlan($cuotas * 1);
     	$promo = TarjetaPlanPromocion::buscarPromo($nroPlan);

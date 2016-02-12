@@ -47,4 +47,14 @@ class TarjetasPlasticos extends Eloquent {
 		return $datos;
 	}
 
+	public static function cuenta($numero_tarjeta){
+
+		$sql = "SELECT numero_cuenta AS cuenta
+				  FROM tarjetas_plasticos
+				 WHERE numero_tarjeta = '$numero_tarjeta'";
+
+		$datos = DB::select($sql);
+
+		return $datos[0]->cuenta;
+	}
 }

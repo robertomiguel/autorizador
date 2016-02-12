@@ -276,7 +276,8 @@ function validarCuotas () {
 
   $.post("autorizaciones/validar-cuotas",
       {
-      cuotas: $('#cant_cuotas').val()
+      cuotas: $('#cant_cuotas').val(),
+      numero_tarjeta: $('#nro_tarjeta').val()
       },
       function(data){
         
@@ -401,8 +402,8 @@ function autorizar() {
 
 function operaciones() {
   //window.location.assign('{{url("/autorizaciones/imprimir-operaciones")}}');
-  window.open('/autorizaciones/imprimir-operaciones', '_blank');
-/*
+//  window.open('/autorizaciones/imprimir-operaciones', '_blank');
+
   $('#mensajetitulo').html("Operaciones del día");
   $('#mensajetexto').html('Consultando...');
   $('#mensajecaja').modal('show');
@@ -411,7 +412,7 @@ function operaciones() {
     function(data){
     $('#mensajetexto').html(data);
   });
-*/
+
 }
 
 function reiniciar(){

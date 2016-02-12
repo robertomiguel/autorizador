@@ -39,7 +39,7 @@
 <table>
   <tr>
     <td>
-      <img src="{{ public_path()}}/img/logotipo.png" alt="">
+      <img src="{{ public_path()}}/img/goya/Logotipo.bmp" alt="">
     </td>
     <td>
       <span class="letra14">{{Empresa::find(1)->nombre_int}}</span> <br>
